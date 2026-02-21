@@ -38,3 +38,7 @@ function checkDeath(){
 function aplicarRecoil(_forca){
 	recoil_force = _forca * -facing; 
 }
+
+function dropItem(_chnce){
+	
+}

@@ -87,14 +87,8 @@ switch (state) {
 	break;
 	
 	
-	case EnemyState.DEATH:
-		
-		hspdEnemy = 0;
-		vspdEnemy = 0;
-		
-		instance_destroy();
-		
-		
+	case EnemyState.DEATH:		
+		instance_destroy();		
 	break;
 }
 //Recoil
@@ -143,3 +137,6 @@ if (place_meeting(x, y + vspdEnemy, obj_Block)){
 }
 
 y += vspdEnemy;
+
+// Trocar Xscale automatico
+image_xscale = facing;
