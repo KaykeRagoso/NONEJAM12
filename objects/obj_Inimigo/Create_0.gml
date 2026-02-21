@@ -1,4 +1,5 @@
-spdEnemy = 2;
+spdEnemy = 1;
+spdEnemyMax = spdEnemy + 1;
 hspdEnemy = 0;
 vspdEnemy = 0;
 
@@ -17,11 +18,10 @@ facing = 1;
 
 
 enum EnemyState{
-	IDLE,
 	PATROL,
 	CHASE,
 	ATTACK,
 	DEATH
 }
 
-state = EnemyState.IDLE;
+state = EnemyState.PATROL;
