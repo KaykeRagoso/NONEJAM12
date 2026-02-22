@@ -7,6 +7,7 @@
   "ResourceOrderSettings":[
     {"name":"obj_Block","order":6,"path":"objects/obj_Block/obj_Block.yy",},
     {"name":"obj_Bullet","order":8,"path":"objects/obj_Bullet/obj_Bullet.yy",},
+    {"name":"obj_Camera","order":9,"path":"objects/obj_Camera/obj_Camera.yy",},
     {"name":"obj_Inimigo","order":4,"path":"objects/obj_Inimigo/obj_Inimigo.yy",},
     {"name":"obj_life","order":1,"path":"objects/obj_life/obj_life.yy",},
     {"name":"obj_Player","order":2,"path":"objects/obj_Player/obj_Player.yy",},

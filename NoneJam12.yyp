@@ -27,6 +27,7 @@
   "resources":[
     {"id":{"name":"obj_Block","path":"objects/obj_Block/obj_Block.yy",},},
     {"id":{"name":"obj_Bullet","path":"objects/obj_Bullet/obj_Bullet.yy",},},
+    {"id":{"name":"obj_Camera","path":"objects/obj_Camera/obj_Camera.yy",},},
     {"id":{"name":"obj_flash_dano","path":"objects/obj_flash_dano/obj_flash_dano.yy",},},
     {"id":{"name":"obj_game_over","path":"objects/obj_game_over/obj_game_over.yy",},},
     {"id":{"name":"obj_Inimigo","path":"objects/obj_Inimigo/obj_Inimigo.yy",},},
