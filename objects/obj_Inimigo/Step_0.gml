@@ -79,8 +79,6 @@ switch (state) {
 		if (ataque_cool >= ataque_delay){
 			ataque_cool = 0;
 			ataque = false;
-			state = EnemyState.ATTACK;
-		}else if (distance_to_object(obj_Player) >= 20){
 			state = EnemyState.CHASE;
 		}
 		

@@ -5,7 +5,7 @@ var key_jump  = keyboard_check_pressed(vk_space) || keyboard_check(vk_up);
 
 //verificando chão e parede
 var grounded = place_meeting(x, y + 1, obj_Block);
-var on_wall  = place_meeting(x + 1, y, obj_Block) - place_meeting(x - 1, y, obj_Block);
+on_wall  = place_meeting(x + 1, y, obj_Block) - place_meeting(x - 1, y, obj_Block);
 
 //controle de mov com trava do wall jump
 if (control_lock > 0) 

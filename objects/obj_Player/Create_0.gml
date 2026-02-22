@@ -1,4 +1,4 @@
-//imput
+//input
 hsp = 0; 
 vsp = 0; 
 grv = 0.4; //gravidade
@@ -16,3 +16,4 @@ dash_sp = 10;
 wall_speed_limit = 2;
 on_wall = 0;
 control_lock = 0; //timer para travar o input horizontal
+
