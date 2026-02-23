@@ -1,4 +1,10 @@
 checkDeath();
+
+if(state == EnemyState.DEATH){
+	instance_destroy();
+	exit;
+}
+
 // Trocar Estado quando o player tiver perto do inimigo
 if (instance_exists(obj_Player) && state != EnemyState.ATTACK && state != EnemyState.DEATH){
 	
@@ -19,15 +25,21 @@ switch (state) {
 
 	case EnemyState.PATROL:
 		
-		hspdEnemy = spdEnemy * facing;
-		
-		// Não cair da plataforma
-		var frontX = x + (facing * 8);
-		var frontY = y + 16;
-		
-		if (!place_meeting(frontX, frontY, obj_Block)) {
-			facing *= -1;
-		}
+	    hspdEnemy = spdEnemy * facing;
+    
+	    // Não cair da plataforma
+	    var frontX = x + (facing * 8);
+	    var frontY = y + 16;
+    
+	    if (!place_meeting(frontX, frontY, obj_Block)) {
+	        facing *= -1;
+	    }
+    
+	    // Não atravessar parede frontal
+	    if (place_meeting(x + facing, y, obj_Block)) {
+	        facing *= -1;
+	    }
+    
 		
 	break;
 	
@@ -77,11 +89,15 @@ switch (state) {
 		
 		// Final do ataque
 		if (ataque_cool >= ataque_delay){
-			ataque_cool = 0;
-			ataque = false;
-			state = EnemyState.ATTACK;
-		}else if (distance_to_object(obj_Player) >= 20){
-			state = EnemyState.CHASE;
+		    ataque_cool = 0;
+		    ataque = false;
+    
+		    // Só volta para CHASE se ainda estiver dentro do range
+		    if (target != noone && point_distance(x,y,target.x,target.y) <= 200){
+		        state = EnemyState.CHASE;
+		    } else {
+		        state = EnemyState.PATROL;
+		    }
 		}
 		
 	break;
@@ -120,7 +136,6 @@ if (place_meeting(x + hspdEnemy, y, obj_Block)){
 	}
 	
 	hspdEnemy = 0;
-	facing *= -1;
 }
 
 x += hspdEnemy;
