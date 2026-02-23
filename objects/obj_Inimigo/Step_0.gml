@@ -188,6 +188,13 @@ if (place_meeting(x, y + vspdEnemy, obj_Block))
 y += vspdEnemy;
 #endregion
 
+#region Troca de Sprite
+switch(state){
+	case EnemyState.ATTACK:
+		sprite_index = spr_enemy_shoting;
+	break;
+}
+image_xscale = facing;
 #region Mudar lado da Sprite
 	image_xscale = facing;
 #endregion
