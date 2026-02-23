@@ -30,7 +30,7 @@ if (instance_exists(obj_Player)) {
     else if (target != noone) {
         tempo_perda_alvo++;
 
-        if (tempo_perda_alvo > 60) {
+        if (tempo_perda_alvo > 90) {
             target = noone;
         }
     }
@@ -195,4 +195,6 @@ switch(state){
 	break;
 }
 image_xscale = facing;
+#region Mudar lado da Sprite
+	image_xscale = facing;
 #endregion
