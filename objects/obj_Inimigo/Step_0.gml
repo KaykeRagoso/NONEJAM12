@@ -26,6 +26,9 @@ switch (state)
     case EnemyState.PATROL:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3f1affa0ac9075f53aad8b70af89bb59ed69ea10
         move_dir = facing;
 
         var frontX = x + (facing * 8);
@@ -114,6 +117,7 @@ switch (state)
         }
 
     break;
+<<<<<<< HEAD
 =======
 	case EnemyState.PATROL:
 		
@@ -189,6 +193,8 @@ switch (state)
 		instance_destroy();		
 	break;
 >>>>>>> main
+=======
+>>>>>>> 3f1affa0ac9075f53aad8b70af89bb59ed69ea10
 }
 
 // Atualiza facing apenas se estiver se movendo
