@@ -37,8 +37,8 @@
     "path":"sprites/sprt_Inimigo/sprt_Inimigo.yy",
   },
   "spriteMaskId":{
-    "name":"sprt_InimigoMask",
-    "path":"sprites/sprt_InimigoMask/sprt_InimigoMask.yy",
+    "name":"sprt_MaskEnemy",
+    "path":"sprites/sprt_MaskEnemy/sprt_MaskEnemy.yy",
   },
   "visible":true,
 }
