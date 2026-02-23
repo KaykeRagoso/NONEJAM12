@@ -158,7 +158,6 @@ if (recoil_force != 0)
 }
 #endregion
 
-
 #region Gravidade
 vspdEnemy += grv;
 
