@@ -211,9 +211,6 @@ if (place_meeting(x, y + vsp, obj_Block)) {
 }
 y += vsp;
 
-
-	
-
 /// cara deiei tudo escrito no codigo pra ajudar vc caso vc precise mecher em alguma ;)
 
 #endregion

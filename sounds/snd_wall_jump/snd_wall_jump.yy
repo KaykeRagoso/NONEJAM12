@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_wall_jump",
   "parent":{
-    "name":"NoneJam12",
-    "path":"NoneJam12.yyp",
+    "name":"Sons",
+    "path":"folders/Sons.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
