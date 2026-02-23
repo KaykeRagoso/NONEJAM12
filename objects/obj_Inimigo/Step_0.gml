@@ -6,148 +6,183 @@ if (state == EnemyState.DEATH) {
 }
 
 
-// Detectar Player
-if (instance_exists(obj_Player) 
-&& state != EnemyState.ATTACK 
-&& state != EnemyState.DEATH)
-{
+// --- DETECÇÃO ---
+if (instance_exists(obj_Player)) {
+
     var distPlayer = point_distance(x, y, obj_Player.x, obj_Player.y);
 
-    if (distPlayer <= 200) {
+    var parede = collision_line(
+        x, y - 10,
+        obj_Player.x, obj_Player.y - 10,
+        obj_Block, false, true
+    );
+
+    if (distPlayer <= dist_visao && !parede) {
+
         target = obj_Player;
-        state = EnemyState.CHASE;
-    } else {
-        target = noone;
-        state = EnemyState.PATROL;
+        tempo_perda_alvo = 0;
+
+        if (state == EnemyState.PATROL) {
+            mostrar_alerta = 60;
+        }
+
+    } 
+    else if (target != noone) {
+        tempo_perda_alvo++;
+
+        if (tempo_perda_alvo > 60) {
+            target = noone;
+        }
     }
 }
 
 
-// STATE MACHINE
+// --- STATE MACHINE ---
 switch (state)
 {
+
     case EnemyState.PATROL:
+
         move_dir = facing;
+        hspdEnemy = spdEnemy * move_dir;
 
         var frontX = x + (facing * 8);
         var frontY = y + 16;
 
-        // Não cair da plataforma ou bater na parede
         if (!place_meeting(frontX, frontY, obj_Block) ||
             place_meeting(x + facing, y, obj_Block))
         {
-            move_dir = -facing;
+            facing *= -1;
         }
 
-        hspdEnemy = spdEnemy * move_dir;
+        if (target != noone)
+            state = EnemyState.CHASE;
+
     break;
 
 
-	case EnemyState.CHASE:
-	    if (target != noone)
-	    {
-	        // centro real do player
-	        var target_center = (target.bbox_left + target.bbox_right) * 0.5;
-	        var dx = target_center - x;
 
-	        // dead zone para não ficar virando freneticamente
-	        if (abs(dx) > 4) {
-	            facing = sign(dx);  // só altera visual
-	        }
+    case EnemyState.CHASE:
 
-	        // movimento real
-	        hspdEnemy = spdEnemyMax * sign(dx);
+        if (target != noone)
+        {
+            var dx = target.x - x;
 
-	        // transição para ATTACK
-	        if (abs(dx) > 40 &&
-	            abs(dx) < 160 &&
-	            abs(target.y - y) < 32)
-	        {
-	            state = EnemyState.ATTACK;
-	        }
-	    }
-	break;
+            facing = sign(dx);
+            hspdEnemy = spdEnemyMax * facing;
+
+            // PULO AUTOMÁTICO MELHORADO
+            if (place_meeting(x + hspdEnemy, y, obj_Block)
+                && place_meeting(x, y + 1, obj_Block))
+            {
+                vspdEnemy = -7.5;
+            }
+
+            if (point_distance(x, y, target.x, target.y) < dist_tiro)
+            {
+                state = EnemyState.ATTACK;
+                ataque = false;
+            }
+        }
+        else
+        {
+            state = EnemyState.PATROL;
+        }
+
+    break;
 
 
-	case EnemyState.ATTACK:
-	    hspdEnemy = 0;
 
-	    if (target != noone) {
-	        // Pega o centro do player
-	        var target_center = (target.bbox_left + target.bbox_right) * 0.5;
-	        var dx = target_center - x;
+    case EnemyState.ATTACK:
 
-	        // Atualiza o facing sempre para o lado do player
-	        facing = sign(dx); 
-	    }
+        if (recoil_force == 0)
+            hspdEnemy = 0;
 
-	    if (!ataque) {
-	        // Dispara o projétil
-	        var bullet = instance_create_layer(x + (facing * 12), y, "Instances", obj_Bullet);
-	        bullet.direction = (facing == 1) ? 0 : 180;
-	        bullet.speed = 6;
+        if (target != noone)
+        {
+            var dir = point_direction(x, y, target.x, target.y);
 
-	        aplicarRecoil(2);
-	        ataque = true;
-	        ataque_cool = 0;
-	    } else {
-	        // Incrementa cooldown
-	        ataque_cool++;
-	        if (ataque_cool >= ataque_delay) {
-	            ataque = false;
-	            // Define próximo estado
-	            if (target != noone && point_distance(x, y, target.x, target.y) <= 200)
-	                state = EnemyState.CHASE;
-	            else
-	                state = EnemyState.PATROL;
-	        }
-	    }
-	break;
+            if (!ataque)
+            {
+                var bullet = instance_create_layer(
+                    x + (facing * 12),
+                    y - 10,
+                    "Instances",
+                    obj_Bullet
+                );
+
+                if (bullet != noone)
+                {
+                    bullet.direction = dir;
+                    bullet.speed = 5;
+                }
+
+                aplicarRecoil(dir, 4);
+
+                ataque = true;
+                ataque_cool = 0;
+            }
+            else
+            {
+                ataque_cool++;
+
+                if (ataque_cool >= ataque_delay)
+                {
+                    ataque = false;
+
+                    if (target != noone)
+                        state = EnemyState.CHASE;
+                    else
+                        state = EnemyState.PATROL;
+                }
+            }
+        }
+        else
+        {
+            state = EnemyState.PATROL;
+        }
+
+    break;
 }
 
 
-// FACING
-if (move_dir != 0) {
-    facing = move_dir;
-}
 
-// RECOIL
+// --- RECOIL ---
 if (recoil_force != 0)
 {
-    hspdEnemy += recoil_force;
+    hspdEnemy = recoil_force;
 
-    recoil_force -= sign(recoil_force) * recoil_decay;
+    recoil_force = lerp(recoil_force, 0, recoil_decay);
 
-    if (abs(recoil_force) < recoil_decay) {
+    if (abs(recoil_force) < 0.05)
         recoil_force = 0;
-    }
 }
 
-// GRAVIDADE
+
+// --- GRAVIDADE ---
 vspdEnemy += grv;
 
-if (vspdEnemy > maxFall) {
+if (vspdEnemy > maxFall)
     vspdEnemy = maxFall;
-}
 
-// COLISÃO HORIZONTAL
+
+// --- COLISÃO HORIZONTAL ---
 if (place_meeting(x + hspdEnemy, y, obj_Block))
 {
-    while (!place_meeting(x + sign(hspdEnemy), y, obj_Block)) {
+    while (!place_meeting(x + sign(hspdEnemy), y, obj_Block))
         x += sign(hspdEnemy);
-    }
 
     hspdEnemy = 0;
 }
 
 x += hspdEnemy;
 
-// COLISÃO VERTICAL
+
+// --- COLISÃO VERTICAL ---
 if (place_meeting(x, y + vspdEnemy, obj_Block))
 {
-    while (!place_meeting(x, y + sign(vspdEnemy), obj_Block)) {
+    while (!place_meeting(x, y + sign(vspdEnemy), obj_Block))
         y += sign(vspdEnemy);
-    }
 
     vspdEnemy = 0;
 }
@@ -155,6 +190,5 @@ if (place_meeting(x, y + vspdEnemy, obj_Block))
 y += vspdEnemy;
 
 
-// SPRITE FLIP
-if (facing == -1) image_xscale = -1;
-if (facing ==  1) image_xscale =  1;
+// --- VISUAL ---
+image_xscale = facing;
