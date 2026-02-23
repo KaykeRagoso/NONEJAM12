@@ -10,8 +10,8 @@
   "name":"obj_Player",
   "overriddenProperties":[],
   "parent":{
-    "name":"NoneJam12",
-    "path":"NoneJam12.yyp",
+    "name":"Objetos",
+    "path":"folders/Objetos.yy",
   },
   "parentObjectId":null,
   "persistent":false,
