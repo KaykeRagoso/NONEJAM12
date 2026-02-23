@@ -189,9 +189,36 @@ y += vspdEnemy;
 #endregion
 
 #region Troca de Sprite
-switch(state){
-	case EnemyState.ATTACK:
-		sprite_index = spr_enemy_shoting;
-	break;
+if (state == EnemyState.DEATH) {
+    sprite_index = spr_enemy_death2;
+    image_speed = 0.2;
+    image_index = min(image_index, image_number - 1);
 }
+else if (!place_meeting(x, y + 1, obj_Block)) {
+    // Inimigo no ar (pulo ou queda)
+    sprite_index = spr_enemy_jump;
+    image_speed = 0.2;
+}
+else {
+    switch(state){
+        case EnemyState.PATROL:
+        case EnemyState.CHASE:
+            sprite_index = spr_enemy_run;
+            image_speed = image_number / 1;
+        break;
+
+        case EnemyState.ATTACK:
+            sprite_index = spr_enemy_shoting;
+            image_speed = 0.2;
+        break;
+
+        default:
+            sprite_index = spr_enemy_idle;
+            image_speed = 0.15;
+        break;
+    }
+}
+
+// Virar sprite de acordo com a direção
+image_xscale = facing;
 #endregion

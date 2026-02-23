@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprt_Inimigo",
-    "path":"sprites/sprt_Inimigo/sprt_Inimigo.yy",
+    "name":"spr_enemy_idle",
+    "path":"sprites/spr_enemy_idle/spr_enemy_idle.yy",
   },
   "spriteMaskId":{
     "name":"sprt_MaskEnemy",
