@@ -58,7 +58,6 @@
     {"$GMFolder":"","%Name":"Move","folderPath":"folders/Sprites/Player/Espada/Move.yy","name":"Move","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Dir","folderPath":"folders/Sprites/Player/Espada/Move/Dir.yy","name":"Dir","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Esq","folderPath":"folders/Sprites/Player/Espada/Move/Esq.yy","name":"Esq","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"SpritesPlayer","folderPath":"folders/Sprites/SpritesPlayer.yy","name":"SpritesPlayer","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Tiros","folderPath":"folders/Sprites/Tiros.yy","name":"Tiros","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "ForcedPrefabProjectReferences":[
@@ -113,7 +112,6 @@
     {"id":{"name":"sprt_FrascoVida","path":"sprites/sprt_FrascoVida/sprt_FrascoVida.yy",},},
     {"id":{"name":"sprt_Inimigo","path":"sprites/sprt_Inimigo/sprt_Inimigo.yy",},},
     {"id":{"name":"sprt_Moeda","path":"sprites/sprt_Moeda/sprt_Moeda.yy",},},
-    {"id":{"name":"sprt_Player","path":"sprites/sprt_Player/sprt_Player.yy",},},
     {"id":{"name":"sprt_PlayerAtaqueCimaEspadaDir","path":"sprites/sprt_PlayerAtaqueCimaEspadaDir/sprt_PlayerAtaqueCimaEspadaDir.yy",},},
     {"id":{"name":"sprt_PlayerAtaqueCimaEspadaEsq","path":"sprites/sprt_PlayerAtaqueCimaEspadaEsq/sprt_PlayerAtaqueCimaEspadaEsq.yy",},},
     {"id":{"name":"sprt_PlayerAtaqueEspadaDir","path":"sprites/sprt_PlayerAtaqueEspadaDir/sprt_PlayerAtaqueEspadaDir.yy",},},

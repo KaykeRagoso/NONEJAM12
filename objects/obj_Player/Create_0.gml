@@ -5,6 +5,8 @@ grv = 0.4;
 walksp = 3;
 jump_force = -9;
 
+global.ativo = true;
+
 // Direção
 facing = 1;
 
@@ -39,7 +41,8 @@ enum PlayerState {
     DASH,
     DEATH,
     DAMAGE,
-    ATTACK
+    ATTACK,
+	CUTSCENE
 }
 
 state = PlayerState.IDLE;

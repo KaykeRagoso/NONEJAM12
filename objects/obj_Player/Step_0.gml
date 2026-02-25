@@ -17,7 +17,7 @@ var move = key_right - key_left;
 
 
 #region SwitchWeapon
-if (key_switchWeapon)
+if (key_switchWeapon && !state == PlayerState.CUTSCENE)
 {
     weapon += 1;
 
@@ -81,6 +81,21 @@ if (attack_cooldown > 0)
 #region STATE MACHINE
 switch (state)
 {
+case PlayerState.CUTSCENE:
+    // Não se move
+    hsp = 0;
+    vsp = 0;
+
+    // Não permite ataques
+    attack_timer = 0;
+    attack_type = 0;
+
+    // Mantém a sprite de idle dependendo da arma
+    if (weapon == WeaponType.BASIC) sprite_index = (facing==1)?sprt_PlayerIdleEsq:sprt_PlayerIdleDir;
+    if (weapon == WeaponType.SWORD) sprite_index = (facing==1)?sprt_PlayerIdleEspadaDir:sprt_PlayerIdleEspadaEsq;
+    if (weapon == WeaponType.GUN) sprite_index = (facing==1)?sprt_PlayerIdleCanhaoEsq:sprt_PlayerIdleCanhaoDir;
+    image_speed = image_number / 2;
+break;
 
 case PlayerState.IDLE:
 
