@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_wall_jump",
+  "%Name":"snd_passos_terra",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -10,17 +10,17 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.56,
+  "duration":45.144012,
   "exportDir":"",
-  "name":"snd_wall_jump",
+  "name":"snd_passos_terra",
   "parent":{
-    "name":"Sons",
-    "path":"folders/Sons.yy",
+    "name":"NoneJam12",
+    "path":"NoneJam12.yyp",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_wall_jump.mp3",
+  "soundFile":"snd_passos_terra.mp3",
   "volume":1.0,
 }

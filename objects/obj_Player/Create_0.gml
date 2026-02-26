@@ -4,7 +4,8 @@ vsp    = 0;
 grv    = 0.4;
 walksp = 3;
 
-
+// Ativa o tremor do personagem enquanto desliza
+        
 //Pulo
 jump_force_basic = -9;
 jump_force_gun   = -9;
