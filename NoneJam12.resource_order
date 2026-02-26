@@ -20,7 +20,6 @@
     {"name":"Tiros","order":6,"path":"folders/Sprites/Tiros.yy",},
   ],
   "ResourceOrderSettings":[
-    {"name":"ft_gui","order":11,"path":"fonts/ft_gui/ft_gui.yy",},
     {"name":"Note2","order":1,"path":"notes/Note2/Note2.yy",},
     {"name":"obs_luz_basica","order":2,"path":"notes/obs_luz_basica/obs_luz_basica.yy",},
     {"name":"obj_ativar_fade_missao1","order":5,"path":"objects/obj_ativar_fade_missao1/obj_ativar_fade_missao1.yy",},
