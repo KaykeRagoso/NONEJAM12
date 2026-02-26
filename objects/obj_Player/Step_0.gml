@@ -110,6 +110,20 @@ if (weapon == WeaponType.GUN && state != PlayerState.CUTSCENE && state != Player
 if (attack_cooldown > 0) attack_cooldown--;
 #endregion
 
+#region Invencibilidade
+
+if (invencivel)
+{
+    inv_timer--;
+
+    if (inv_timer <= 0)
+    {
+        invencivel = false;
+    }
+}
+
+#endregion
+
 #region State Machine
 switch (state)
 {
@@ -360,6 +374,20 @@ case PlayerState.ATTACK:
 
 break;
 
+case PlayerState.DAMAGE:
+
+    hsp = lengthdir_x(knockback_force, knockback_dir);
+    vsp = -2;
+
+    knockback_force = lerp(knockback_force, 0, 0.2);
+
+    if (knockback_force < 0.2)
+    {
+        state = PlayerState.AIR;
+    }
+
+break;
+
 }
 #endregion
 
@@ -538,7 +566,7 @@ function _hitEnemies(_x1, _y1, _x2, _y2, _dmg)
     var ry1 = y + _y1;
     var ry2 = y + _y2;
 
-    var _hit = collision_rectangle(rx1, ry1, rx2, ry2, obj_Inimigo, false, true);
+    var _hit = collision_rectangle(rx1, ry1, rx2, ry2, obj_InimigoPai, false, true);
     if (_hit != noone)
         with (_hit) { hpEnemy -= _dmg; }
 }
