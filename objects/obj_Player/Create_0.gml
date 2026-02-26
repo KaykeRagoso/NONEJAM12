@@ -69,7 +69,6 @@ attack_duration     = 15;
 attack_cooldown     = 0;
 attack_cooldown_max = 5;
 
-
 //Combo
 combo_step     = 0;
 combo_timer    = 0;

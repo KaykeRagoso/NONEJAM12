@@ -406,13 +406,7 @@ case PlayerState.IDLE:
         }
         else if (gun_charge < gun_max_charge)
         {
-            // Charge ativo — sincroniza frames 2 ao 54 com gun_charge
-            // Frame 2-7:   tiro fraco pequeno aparece
-            // Frame 8-10:  próximo tiro
-            // Frame 10-19: efeitos de energia
-            // Frame 20-28: tiro cresce
-            // Frame 29-46: pisca azul
-            // Frame 47-54: pisca roxo
+
             image_index = 2 + (gun_charge / (gun_max_charge - 1)) * 52;
         }
         else
