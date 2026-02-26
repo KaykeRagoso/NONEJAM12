@@ -605,14 +605,17 @@ break;
 
 case PlayerState.DEATH:
     if (!grounded_final || death_timer <= 10) {
-        // Tocando animação de morte
         sprite_index = (facing == 1) ? sprt_PlayerDeathEsq : sprt_PlayerDeathDir;
         image_speed  = 0.2;
     } else {
-        // No chão parado
-        sprite_index = (facing == 1) ? sprt_PlayerDownEsq : sprt_PlayerDownDir;
-        image_speed  = 0;
-        image_index  = 0;
+        switch (weapon)
+        {
+            case WeaponType.BASIC: sprite_index = (facing==1) ? sprt_PlayerDownEsq         : sprt_PlayerDownDir;         break;
+            case WeaponType.SWORD: sprite_index = (facing==1) ? sprt_PlayerDownEsqEspada   : sprt_PlayerDownDirEspada;   break;
+            case WeaponType.GUN:   sprite_index = (facing==1) ? sprt_PlayerDownCanhaoEsq   : sprt_PlayerDownCanhaoDir;   break;
+        }
+        image_speed = 0;
+        image_index = 0;
     }
 break;
 
