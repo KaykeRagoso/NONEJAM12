@@ -32,6 +32,8 @@ wall_speed_limit = 3;
 on_wall          = 0;
 control_lock     = 0;
 
+som_atual = noone;
+
 
 //Partículas
 part_sys  = part_system_create();
