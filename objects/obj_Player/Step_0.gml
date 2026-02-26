@@ -525,24 +525,31 @@ case PlayerState.ATTACK:
         }
     }
 
-    if (weapon == WeaponType.SWORD)
-    {
-        switch (attack_type)
-        {
-            case 1: sprite_index = (facing==1) ? sprt_PlayerAtaqueEspadaEsq      : sprt_PlayerAtaqueEspadaDir;      break;
-            case 2: sprite_index = (facing==1) ? sprt_PlayerAtaqueEspadaEsq      : sprt_PlayerAtaqueEspadaDir;      break;
-            case 3: sprite_index = (facing==1) ? sprt_PlayerAtaqueLoucoEspadaEsq : sprt_PlayerAtaqueLoucoEspadaDir; break;
-        }
-    }
+	if (weapon == WeaponType.SWORD)
+	{
+	    switch (attack_type)
+	    {
+	        case 1: 
+	        case 2:
+	            sprite_index = (facing==1) ? sprt_PlayerAtaqueEspadaEsq : sprt_PlayerAtaqueEspadaDir;      
+	            image_speed = image_number / 2; // padrão
+	        break;
+
+	        case 3: 
+	            sprite_index = (facing==1) ? sprt_PlayerAtaqueLoucoEspadaEsq : sprt_PlayerAtaqueLoucoEspadaDir; 
+	            image_speed = image_number / 2; // mais lento, ajusta como quiser
+	        break;
+	    }
+	}
 
     if (weapon == WeaponType.GUN)
     {
         // Na hora do disparo usa sprt_PlayerAtirou
         // Se quiser sprites diferentes por nível, troque aqui
         sprite_index = (facing==1) ? sprt_PlayerAtirouEsq : sprt_PlayerAtirouDir;
+        image_speed = image_number / 2;
     }
-
-    image_speed = image_number / 2;
+    // para demais armas, a velocidade já foi definida nos blocos acima
 break;
 
 }
