@@ -594,8 +594,13 @@ case PlayerState.ATTACK:
 break;
 
 case PlayerState.HIT:
-    sprite_index = (facing == 1) ? sprt_PlayerHitEsq : sprt_PlayerHitDir;
-    image_speed  = image_number / hit_duration;
+    switch (weapon)
+    {
+        case WeaponType.BASIC: sprite_index = (facing==1) ? sprt_PlayerHitEsq : sprt_PlayerHitDir; break;
+        case WeaponType.SWORD: sprite_index = (facing==1) ? sprt_PlayerHitEsqEspada : sprt_PlayerHitDirEspada; break;
+        case WeaponType.GUN:   sprite_index = (facing==1) ? sprt_PlayerHitEsqCanhao : sprt_PlayerHitDirCanhao; break;
+    }
+    image_speed = image_number / hit_duration;
 break;
 
 case PlayerState.DEATH:
