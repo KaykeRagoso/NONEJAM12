@@ -666,13 +666,11 @@ function _hitEnemies(_x1, _y1, _x2, _y2, _dmg)
 
     var _hit = collision_rectangle(rx1, ry1, rx2, ry2, obj_InimigoPai, false, true);
     if (_hit != noone)
-        with (_hit) { hpEnemy -= _dmg; }
+        with (_hit) { takeDamage(_dmg, other.facing); }
 }
 
-
-if (state == PlayerState.RUN) {
-
-    
+#region Sons
+if (state == PlayerState.RUN) {    
         // correr
         if (som_atual != snd_passos_terra) {
 			 
@@ -693,3 +691,4 @@ if keyboard_check_pressed(vk_shift){
 		audio_play_sound(snd_dash,10,false)
 	}
 }
+#endregion
