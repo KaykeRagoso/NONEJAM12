@@ -22,6 +22,7 @@
     {"$GMFolder":"","%Name":"menu_principal","folderPath":"folders/menu/menu_principal.yy","name":"menu_principal","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"pre_menu","folderPath":"folders/menu/pre_menu.yy","name":"pre_menu","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Objetos","folderPath":"folders/Objetos.yy","name":"Objetos","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Inimigos","folderPath":"folders/Objetos/Inimigos.yy","name":"Inimigos","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"parallax","folderPath":"folders/parallax.yy","name":"parallax","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Rooms","folderPath":"folders/Rooms.yy","name":"Rooms","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"sistema_de_luz_basico","folderPath":"folders/sistema_de_luz_basico.yy","name":"sistema_de_luz_basico","resourceType":"GMFolder","resourceVersion":"2.0",},
