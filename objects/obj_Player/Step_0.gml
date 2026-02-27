@@ -11,7 +11,7 @@ var key_attack_pressed = keyboard_check_pressed(ord("Z"));
 var key_attack_released= keyboard_check_released(ord("Z"));
 
 var key_kick           = keyboard_check_pressed(ord("X"));
-var key_spin           = keyboard_check_pressed(ord("C"));
+//var key_spin           = keyboard_check_pressed(ord("C"));
 
 var move = key_right - key_left;
 
@@ -182,12 +182,12 @@ case PlayerState.IDLE:
 
     if (weapon != WeaponType.GUN)
     {
-        if ((key_attack_pressed || key_kick || key_spin) && attack_cooldown <= 0)
+        if ((key_attack_pressed || key_kick) && attack_cooldown <= 0)
         {
             state           = PlayerState.ATTACK;
             attack_timer    = 0;
             attack_cooldown = attack_cooldown_max;
-            _setAttackType(weapon, key_attack_pressed, key_kick, key_spin);
+            _setAttackType(weapon, key_attack_pressed, key_kick);
         }
     }
 
@@ -217,12 +217,12 @@ case PlayerState.RUN:
 
     if (weapon != WeaponType.GUN)
     {
-        if ((key_attack_pressed || key_kick || key_spin) && attack_cooldown <= 0)
+        if ((key_attack_pressed || key_kick) && attack_cooldown <= 0)
         {
             state           = PlayerState.ATTACK;
             attack_timer    = 0;
             attack_cooldown = attack_cooldown_max;
-            _setAttackType(weapon, key_attack_pressed, key_kick, key_spin);
+            _setAttackType(weapon, key_attack_pressed, key_kick);
         }
     }
 
@@ -627,7 +627,7 @@ break;
 #endregion
 
 /// Define attack_type com base na arma e tecla pressionada
-function _setAttackType(_wpn, _atk, _kick, _spin)
+function _setAttackType(_wpn, _atk, _kick)
 {
     switch (_wpn)
     {
@@ -640,7 +640,7 @@ function _setAttackType(_wpn, _atk, _kick, _spin)
                 attack_type = combo_step;
             }
             if (_kick) attack_type = 3;
-            if (_spin) attack_type = 4;
+            //if (_spin) attack_type = 4;
         break;
 
         case WeaponType.SWORD:
@@ -696,5 +696,10 @@ if (place_meeting(x, y, obj_Moedas) || place_meeting(x, y, obj_PotionLife)) {
     if (!audio_is_playing(snd_pegarItem)) {
         audio_play_sound(snd_pegarItem, 2, false);
     }
+}
+
+if (state == PlayerState.HIT && hit_timer == hit_duration){
+	var hitSound = choose(snd_hit,snd_hitnovoice);
+	audio_play_sound(hitSound,2,false);
 }
 #endregion

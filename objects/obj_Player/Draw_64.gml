@@ -2,7 +2,6 @@ var _hud_x = 96;
 var _hud_y = 128;
 
 var _spr = -1;
-
 switch (weapon)
 {
     case WeaponType.BASIC:

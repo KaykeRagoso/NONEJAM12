@@ -155,3 +155,4 @@ function takeDamage(_amount, _knockback_dir) {
     hit_timer        = hit_duration;
     state            = PlayerState.HIT;
 }
+
