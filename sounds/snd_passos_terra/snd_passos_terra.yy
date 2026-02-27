@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_passos_terra",
   "parent":{
-    "name":"NoneJam12",
-    "path":"NoneJam12.yyp",
+    "name":"Sons",
+    "path":"folders/Sons.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

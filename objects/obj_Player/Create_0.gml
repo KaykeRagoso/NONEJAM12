@@ -95,6 +95,8 @@ combo_step     = 0;
 combo_timer    = 0;
 combo_max_time = 20;
 
+//Moeda
+global.moeda = 0;
 
 //Canhão
 gun_charge     = 0;
@@ -114,7 +116,7 @@ is_dead          = false;
 //Funções
 function shootBullet(_sprite, _dir, _spd, _dmg, _offset_x, _offset_y, _onehit)
 {
-    var b          = instance_create_layer(x + _offset_x, y + _offset_y, "Instances", obj_EnemyBullet);
+    var b          = instance_create_layer(x + _offset_x, y + _offset_y, "Instances", obj_PlayerBullet);
     b.sprite_index = _sprite;
     b.image_speed  = 3;
     b.image_xscale = (_dir == 180) ? -1 : 1;
