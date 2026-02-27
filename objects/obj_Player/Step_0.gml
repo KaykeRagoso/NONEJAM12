@@ -300,6 +300,7 @@ case PlayerState.AIR:
     if (key_dash && can_dash && dash_cooldown_timer <= 0) {
         state = PlayerState.DASH;
         dash_delay_timer = dash_delay;
+		audio_play_sound(snd_dash,8,false);
     }
 
 break;
