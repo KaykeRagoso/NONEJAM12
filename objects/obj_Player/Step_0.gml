@@ -180,15 +180,16 @@ case PlayerState.IDLE:
     }
 
     if (weapon != WeaponType.GUN)
-    {
-        if ((key_attack_pressed || key_kick || key_spin) && attack_cooldown <= 0)
-        {
-            state           = PlayerState.ATTACK;
-            attack_timer    = 0;
-            attack_cooldown = attack_cooldown_max;
-            _setAttackType(weapon, key_attack_pressed, key_kick, key_spin);
-        }
-    }
+	{
+	    var _pode_spin = (weapon == WeaponType.BASIC) && key_spin;
+	    if ((key_attack_pressed || key_kick || _pode_spin) && attack_cooldown <= 0)
+	    {
+	        state           = PlayerState.ATTACK;
+	        attack_timer    = 0;
+	        attack_cooldown = attack_cooldown_max;
+	        _setAttackType(weapon, key_attack_pressed, key_kick, key_spin);
+	    }
+	}
 
 break;
 
