@@ -222,7 +222,7 @@ case PlayerState.RUN:
             state           = PlayerState.ATTACK;
             attack_timer    = 0;
             attack_cooldown = attack_cooldown_max;
-            _setAttackType(weapon, key_attack_pressed, key_kick);
+            _setAttackType(weapon, key_attack_pressed, key_kick,false);
         }
     }
 
@@ -532,7 +532,7 @@ case PlayerState.RUN:
         case WeaponType.SWORD: sprite_index = (facing==1) ? sprt_PlayerRunEspadaEsq : sprt_PlayerRunEspadaDir; break;
         case WeaponType.GUN:   sprite_index = (facing==1) ? sprt_PlayerRunCanhaoEsq : sprt_PlayerRunCanhaoDir; break;
     }
-    image_speed = image_number / 6;
+    image_speed = image_number / 8;
 break;
 
 case PlayerState.AIR:
@@ -571,6 +571,7 @@ case PlayerState.ATTACK:
             case 3: sprite_index = (facing==1) ? sprt_PlayerChuteBaixoEsq      : sprt_PlayerChuteBaixoDir;      break;
             case 4: sprite_index = (facing==1) ? sprt_PlayerAtaqueGiratorioEsq : sprt_PlayerAtaqueGiratorioDir; break;
         }
+		image_speed = image_number / 6;
     }
 
     if (weapon == WeaponType.SWORD)
@@ -686,11 +687,8 @@ if (state == PlayerState.RUN) {
         som_atual = noone;
     }
 }
-if keyboard_check_pressed(vk_shift){
-	if key_dash == true{
-		if (dash_delay_timer > 0)
-		audio_play_sound(snd_dash,10,false)
-	}
+if (keyboard_check_pressed(vk_shift) && can_dash && dash_cooldown_timer <= 0) {
+    audio_play_sound(snd_dash, 10, false);
 }
 
 if (place_meeting(x, y, obj_Moedas) || place_meeting(x, y, obj_PotionLife)) {
