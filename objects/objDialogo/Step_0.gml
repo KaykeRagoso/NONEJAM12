@@ -1,9 +1,12 @@
-if (keyboard_check_pressed(vk_space)){ // pula pro proximode texto
-index++;
-index_letra = 1;
-//audio_play_sound(sndGeladeiraAbrindo,2,false)
-if(index >= array_length(texto)){ // destroi quando acaba 
-	
-	instance_destroy()
-}
+if (keyboard_check_pressed(vk_space)) {
+    index++;
+    index_letra = 1;
+
+    if (index >= array_length(texto)) {
+        // Libera o player ao terminar o diálogo
+        with (obj_Player) {
+            state = PlayerState.IDLE;
+        }
+        instance_destroy();
+    }
 }
