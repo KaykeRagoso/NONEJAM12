@@ -692,3 +692,8 @@ if keyboard_check_pressed(vk_shift){
 	}
 }
 #endregion
+
+#region Sistema de Extras
+//if (place_meeting(x,y,obj_PotionLife)) hp += 15;
+show_debug_message(global.vida_atual)
+#endregion

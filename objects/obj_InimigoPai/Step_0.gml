@@ -348,7 +348,6 @@ else
         break;
 
     }
-
 }
 
 image_xscale = facing;
