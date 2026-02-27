@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_dash",
+  "%Name":"snd_pegarItem",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -10,9 +10,9 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":45.144012,
+  "duration":0.9126531,
   "exportDir":"",
-  "name":"snd_dash",
+  "name":"snd_pegarItem",
   "parent":{
     "name":"Sons",
     "path":"folders/Sons.yy",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_dash.mp3",
+  "soundFile":"snd_pegarItem.ogg",
   "volume":1.0,
 }

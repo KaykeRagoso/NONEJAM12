@@ -1,6 +1,6 @@
 event_inherited();
 
-hpEnemy = 3;
+hpEnemy = 5;
 
 spdEnemy = 1;
 spdEnemyMax = 2.2;

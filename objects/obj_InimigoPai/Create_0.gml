@@ -23,6 +23,9 @@ move_dir = 1;
 
 nao_cair_plataforma = true;
 
+drop_timer = 0;
+drop_delay = 90; // 1.5 segundo
+
 #endregion
 
 #region Tiro
@@ -66,6 +69,8 @@ erro_tiro = 6;
 recoil_force = 0;
 recoil_decay = 0.15;
 
+contato_dano_cooldown = 0;
+
 #endregion
 
 
@@ -84,13 +89,14 @@ tempo_perda_alvo = 0;
 #region FUNÇÕES
 
 function checkDeath(){
-
     if (hpEnemy <= 0 && !dropped){
-        dropItem();
-        dropped = true;
-        state = EnemyState.DEATH;	
+        drop_timer++;
+        if (drop_timer >= drop_delay){
+            dropItem();
+            dropped = true;
+            state = EnemyState.DEATH;
+        }
     }
-
 }
 
 function aplicarRecoil(_dir, _forca){
@@ -103,11 +109,11 @@ function dropItem(){
 
     var chance = irandom_range(1,100);
 	
-    if (chance <= 10){
-        show_debug_message("Dropou Potion");
+    if (chance <= 35){
+        instance_create_layer(x,y,"Instances",obj_PotionLife)
     }
-    else if (chance <= 25){
-        show_debug_message("Dropou Munição");
+    else if (chance <= 20){
+        instance_create_layer(x,y,"Instances",obj_Moedas)
     }
 
 }
