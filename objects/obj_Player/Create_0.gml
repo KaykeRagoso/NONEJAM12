@@ -1,3 +1,6 @@
+global.vida_atual = 100;
+global.vida_max   = 100;
+
 //Movimento
 hsp    = 0;
 vsp    = 0;
@@ -72,9 +75,21 @@ enum WeaponType {
 state  = PlayerState.IDLE;
 weapon = WeaponType.BASIC;
 
+// Garante que o diálogo está limpo ao criar o player
+if (instance_exists(obj_Dialogo)) {
+    obj_Dialogo.dialogo_ativo = false;
+    obj_Dialogo.linhas        = [];
+    obj_Dialogo.linha_atual   = 0;
+    obj_Dialogo.npc_dono      = noone;
+}
+
 // Vida do player
 max_hp = 100;
 hp     = max_hp;
+
+global.vida_max = max_hp;
+global.vida_atual = hp;
+
 invincible      = false; // para dar um tempo de invencibilidade após levar dano
 invincible_timer = 0;
 invincible_time  = 30;   // frames de invencibilidade após levar dano
@@ -98,9 +113,6 @@ combo_max_time = 20;
 combo_zx_timer = 0;
 combo_zx_window = 45; // janela de tempo pra apertar X após Z
 combo_zx_ready = false;
-
-//Moeda
-global.moeda = 0;
 
 //Canhão
 gun_charge     = 0;
@@ -137,8 +149,8 @@ function shootBullet(_sprite, _dir, _spd, _dmg, _offset_x, _offset_y, _onehit)
 function takeDamage(_amount, _knockback_dir) {
     if (invincible || is_dead) exit;
 
-    global.vida_atual -= _amount;
-    global.vida_atual = clamp(global.vida_atual, 0, global.vida_max);
+    hp -= _amount;
+    global.vida_atual = clamp(hp, 0, max_hp);
 
     instance_create_layer(x, y, "Instances", obj_flash_dano);
     audio_play_sound(snd_hitplayer, 1, false);
@@ -160,3 +172,4 @@ function takeDamage(_amount, _knockback_dir) {
     state            = PlayerState.HIT;
 }
 
+show_debug_message("Player criado - vida: " + string(global.vida_atual) + " | state: " + string(state));

@@ -1,7 +1,8 @@
 #region Input
 var key_left     = keyboard_check(ord("A")) || keyboard_check(vk_left);
 var key_right    = keyboard_check(ord("D")) || keyboard_check(vk_right);
-var key_jump     = keyboard_check_pressed(vk_space) || keyboard_check_pressed(vk_up);
+var _dialogo_ativo = instance_exists(obj_Dialogo) && obj_Dialogo.dialogo_ativo;
+var key_jump       = (keyboard_check_pressed(vk_space) || keyboard_check_pressed(vk_up)) && !_dialogo_ativo;
 var key_dash     = keyboard_check_pressed(vk_shift);
 
 var key_switchWeapon   = keyboard_check_pressed(vk_tab);
@@ -51,19 +52,6 @@ var ramp_inst = noone;
 // bloco horizontal normal
 if (place_meeting(x, y + 1, obj_Block))
     grounded = true;
-
-//// checa se estamos sobre uma rampa (usa um pixel adiante para "colocar o pé" na inclinação)
-//ramp_inst = instance_place(x, y + 1, obj_RampaDir);
-//if (ramp_inst != noone)
-//{
-//    grounded = true;
-//}
-//else
-//{
-//    ramp_inst = instance_place(x, y + 1, obj_RampaEsq);
-//    if (ramp_inst != noone)
-//        grounded = true;
-//}
 
 // paredes (não são afetadas por rampas)
 var wall_r = place_meeting(x + 1, y, obj_Block);
@@ -203,7 +191,7 @@ case PlayerState.IDLE:
     {
         vsp   = jump_force;
         state = PlayerState.AIR;
-        audio_play_sound(snd_Jump, 10, false);
+        audio_play_sound(snd_wall_jump, 10, false);
     }
 
     if (weapon != WeaponType.GUN)
@@ -235,7 +223,7 @@ case PlayerState.RUN:
     {
         vsp   = jump_force;
         state = PlayerState.AIR;
-        audio_play_sound(snd_Jump, 10, false);
+        audio_play_sound(snd_wall_jump, 10, false);
     }
 
     if (key_dash && can_dash && dash_cooldown_timer <= 0) {
@@ -471,18 +459,16 @@ case PlayerState.DEATH:
 
     death_timer++;
 
-    // Gruda no chão feito um cadáver
     if (place_meeting(x, y + 1, obj_Block)) {
         vsp = 0;
-        // Empurra pra fora do chão caso esteja enterrado
         while (place_meeting(x, y, obj_Block)) {
             y--;
         }
-
-        if (death_timer > 10 && !instance_exists(obj_game_over)) {
-            instance_create_layer(0, 0, "Instances", obj_game_over);
-
-        }
+    }
+    
+    // CORREÇÃO: Criar obj_game_over apenas UMA VEZ no frame 60
+    if (death_timer == 60 && !instance_exists(obj_game_over)) {
+        instance_create_layer(0, 0, "Instances", obj_game_over);
     }
 break;
 
