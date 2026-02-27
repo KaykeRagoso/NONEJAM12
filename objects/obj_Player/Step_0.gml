@@ -585,7 +585,7 @@ case PlayerState.ATTACK:
 
             case 3:
                 sprite_index = (facing==1) ? sprt_PlayerAtaqueLoucoEspadaEsq : sprt_PlayerAtaqueLoucoEspadaDir;
-                image_speed = image_number / 4;
+                image_speed = image_number / 6;
             break;
         }
     }
@@ -664,15 +664,13 @@ function _hitEnemies(_x1, _y1, _x2, _y2, _dmg)
     var ry1 = y + _y1;
     var ry2 = y + _y2;
 
-    var _hit = collision_rectangle(rx1, ry1, rx2, ry2, obj_InimigoPai, false, true);
+    var _hit = collision_rectangle(rx1, ry1, rx2, ry2, obj_InimigoPai, true, true);
     if (_hit != noone)
-        with (_hit) { hpEnemy -= _dmg; }
+        with (_hit) { takeDamage(_dmg, other.facing); }
 }
 
-
-if (state == PlayerState.RUN) {
-
-    
+#region Sons
+if (state == PlayerState.RUN) {    
         // correr
         if (som_atual != snd_passos_terra) {
 			 
@@ -693,3 +691,10 @@ if keyboard_check_pressed(vk_shift){
 		audio_play_sound(snd_dash,10,false)
 	}
 }
+
+if (place_meeting(x, y, obj_Moedas) || place_meeting(x, y, obj_PotionLife)) {
+    if (!audio_is_playing(snd_pegarItem)) {
+        audio_play_sound(snd_pegarItem, 2, false);
+    }
+}
+#endregion
