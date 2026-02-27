@@ -1,0 +1,1 @@
+texto = "creditos por toda a equipe:blabla"
