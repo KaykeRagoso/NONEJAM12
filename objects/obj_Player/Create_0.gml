@@ -12,7 +12,6 @@ jump_force_gun   = -9;
 jump_force_sword = -12;
 jump_force       = jump_force_basic;
 
-som_atual = noone;
 
 //Direção e Dash
 facing           = 1;

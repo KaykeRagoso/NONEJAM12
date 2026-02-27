@@ -686,7 +686,7 @@ if (state == PlayerState.RUN) {
     }
 }
 if keyboard_check_pressed(vk_shift){
-	if key_dash = true{
+	if key_dash == true{
 		if (dash_delay_timer > 0)
 		audio_play_sound(snd_dash,10,false)
 	}
