@@ -203,7 +203,7 @@ case PlayerState.IDLE:
     {
         vsp   = jump_force;
         state = PlayerState.AIR;
-        audio_play_sound(snd_Jump, 10, false);
+        audio_play_sound(snd_wall_jump, 10, false);
     }
 
     if (weapon != WeaponType.GUN)
@@ -235,7 +235,7 @@ case PlayerState.RUN:
     {
         vsp   = jump_force;
         state = PlayerState.AIR;
-        audio_play_sound(snd_Jump, 10, false);
+        audio_play_sound(snd_wall_jump, 10, false);
     }
 
     if (key_dash && can_dash && dash_cooldown_timer <= 0) {
