@@ -121,6 +121,7 @@
     {"id":{"name":"obj_Soldado","path":"objects/obj_Soldado/obj_Soldado.yy",},},
     {"id":{"name":"obj_SuperSoldadoArma","path":"objects/obj_SuperSoldadoArma/obj_SuperSoldadoArma.yy",},},
     {"id":{"name":"obj_SuperSoldadoSemArma","path":"objects/obj_SuperSoldadoSemArma/obj_SuperSoldadoSemArma.yy",},},
+    {"id":{"name":"objCreditos","path":"objects/objCreditos/objCreditos.yy",},},
     {"id":{"name":"objDialogo","path":"objects/objDialogo/objDialogo.yy",},},
     {"id":{"name":"objDialogo1","path":"objects/objDialogo1/objDialogo1.yy",},},
     {"id":{"name":"menu","path":"rooms/menu/menu.yy",},},
@@ -248,9 +249,9 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
+    {"roomId":{"name":"menu","path":"rooms/menu/menu.yy",},},
     {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"roomId":{"name":"pre_menu","path":"rooms/pre_menu/pre_menu.yy",},},
-    {"roomId":{"name":"menu","path":"rooms/menu/menu.yy",},},
     {"roomId":{"name":"rm_creditos","path":"rooms/rm_creditos/rm_creditos.yy",},},
   ],
   "templateType":"game",

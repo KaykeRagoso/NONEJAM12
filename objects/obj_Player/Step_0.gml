@@ -148,8 +148,10 @@ switch (state)
 
 // Cutscene
 case PlayerState.CUTSCENE:
+
     hsp = 0;
-    vsp = 0;
+    vsp = 20;
+	
     attack_timer = 0;
     attack_type  = 0;
 
@@ -159,7 +161,7 @@ case PlayerState.CUTSCENE:
         case WeaponType.SWORD: sprite_index = (facing==1) ? sprt_PlayerIdleEspadaDir : sprt_PlayerIdleEspadaEsq; break;
         case WeaponType.GUN:   sprite_index = (facing==1) ? sprt_PlayerIdleCanhaoEsq : sprt_PlayerIdleCanhaoDir; break;
     }
-    image_speed = image_number / 2;
+    image_speed = image_number / 5;
 break;
 
 
