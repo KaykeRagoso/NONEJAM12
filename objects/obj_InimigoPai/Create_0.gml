@@ -42,7 +42,7 @@ target = noone;
 #endregion
 
 #region VIDA
-hpEnemy = 1;
+hpEnemy = 3;
 dropped = false;
 drop_timer = 0;
 drop_delay = 90;
@@ -66,7 +66,7 @@ dist_min_tiro = 80;
 mostrar_alerta = 0;
 tempo_perda_alvo = 0;
 can_see_player = false;
-alerta_foi_mostrado = false;
+alerta_foi_mostrado = false; // Controla se o alerta já apareceu
 #endregion
 
 #region PISCAR (HIT)
@@ -74,6 +74,12 @@ piscar_ativo = false;
 piscar_tempo = 0;
 piscar_duracao = 30; // Pisca por 30 frames
 piscar_velocidade = 5; // Pisca a cada 5 frames
+#endregion
+
+#region SONS
+som_passos_cooldown = 0;
+som_passos_delay = 15; // Delay entre passos
+som_ataque_tocado = false; // Evita tocar som múltiplas vezes
 #endregion
 
 #region SPRITES
@@ -136,6 +142,7 @@ function takeDamage(_dano,_dir){
     mostrar_alerta = 40;
     piscar_ativo = true;
     piscar_tempo = 0;
+    audio_play_sound(snd_hitplayer, 10, false); // Som ao levar dano
 }
 
 function atirarBala(){
@@ -157,6 +164,14 @@ function atirarBala(){
     }
 
     aplicarRecoil(dir, 4);
+    
+    // Som do tiro - diferente para soldado e boss
+    if (tipo_inimigo == EnemyType.SOLDADO){
+        audio_play_sound(snd_Kick, 10, false); // Som do tiro do soldado
+    }
+    else if (tipo_inimigo == EnemyType.BOSS){
+        audio_play_sound(snd_Espada, 10, false); // Som do ataque do boss
+    }
 }
 
 #endregion

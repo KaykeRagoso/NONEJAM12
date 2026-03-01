@@ -1,4 +1,4 @@
-/// obj_Inimigo - Step Event (VERSÃO CORRIGIDA)
+/// obj_Inimigo - Step Event (COM SONS)
 
 checkDeath();
 
@@ -95,6 +95,15 @@ switch (state){
         if (parede || (nao_cair_plataforma && !chao_frente)){
             facing *= -1;
         }
+        
+        // Som de passos durante patrulha
+        if (place_meeting(x, y + 1, obj_Block)){
+            som_passos_cooldown--;
+            if (som_passos_cooldown <= 0){
+                audio_play_sound(snd_passos_terra, 10, false);
+                som_passos_cooldown = som_passos_delay;
+            }
+        }
 
         if (target != noone){
             state = EnemyState.CHASE;
@@ -110,6 +119,15 @@ switch (state){
             if (place_meeting(x + hspdEnemy, y, obj_Block) && place_meeting(x, y + 1, obj_Block)){
                 vspdEnemy = -7.5;
             }
+            
+            // Som de passos durante chase
+            if (place_meeting(x, y + 1, obj_Block)){
+                som_passos_cooldown--;
+                if (som_passos_cooldown <= 0){
+                    audio_play_sound(snd_passos_terra, 10, false);
+                    som_passos_cooldown = som_passos_delay;
+                }
+            }
 
             var dist = point_distance(x, y, target.x, target.y);
 
@@ -117,6 +135,7 @@ switch (state){
                 state = EnemyState.ATTACK;
                 ataque = false;
                 tempo_mira = 0;
+                som_ataque_tocado = false; // Reset do som de ataque
             }
         }
         else{
@@ -127,7 +146,7 @@ switch (state){
     case EnemyState.ATTACK:
         hspdEnemy = 0;
 
-        // MELHORIA: Permitir pulo durante ataque se bater em parede
+        // Permitir pulo durante ataque se bater em parede
         if (place_meeting(x, y + 1, obj_Block) && place_meeting(x + sign(facing), y, obj_Block)){
             vspdEnemy = -7.5;
         }
@@ -178,7 +197,7 @@ if (tipo_inimigo == EnemyType.BOSS){
         ataque_especial_cooldown--;
     }
 
-    // MELHORIA: Delay mínimo entre ataques especiais
+    // Delay mínimo entre ataques especiais
     if (state == EnemyState.CHASE && ataque_especial_cooldown <= 0 && target != noone && !ataque_especial_ativo){
         ataque_especial_ativo = true;
         ataque_especial_duracao = 60;
