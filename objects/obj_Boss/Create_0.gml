@@ -1,5 +1,3 @@
-/// obj_Boss - Create Event
-
 event_inherited();
 
 tipo_inimigo = EnemyType.BOSS;
@@ -34,8 +32,8 @@ ataque_alcance = 35; // Alcance do soco
 ataque_tocou_player = false; // Evita dano múltiplo
 
 socos_consecutivos = 0; // Quantos socos já deu
-socos_minimos = 2; // Mínimo de socos antes de poder fazer pulo
-chance_pulo_apos_socos = 40; // Chance (%) de fazer pulo após os socos mínimos
+socos_minimos = 3; // Precisa de 3 socos antes de poder pular
+chance_pulo_apos_socos = 60; // 60% de chance de pular
 #endregion
 
 #region BOSS SPECIAL ATTACK - PULO

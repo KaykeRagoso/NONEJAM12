@@ -1,5 +1,3 @@
-/// obj_Boss - Step Event
-
 checkDeath();
 
 if (state == EnemyState.DEATH){
@@ -102,6 +100,7 @@ switch (state){
         if (target != noone && instance_exists(target)){
             var dx = target.x - x;
             facing = sign(dx);
+            image_xscale = facing; 
             hspdEnemy = spdEnemyMax * facing;
 
             if (place_meeting(x + hspdEnemy, y, obj_Block) && place_meeting(x, y + 1, obj_Block)){
@@ -141,90 +140,88 @@ switch (state){
         }
 
         if (target != noone && instance_exists(target)){
-            // Cooldown entre ataques
-            if (ataque_cooldown > 0){
-                ataque_cooldown--;
-            }
-            else {
-                // Decidir qual tipo de ataque fazer
-                var fazer_pulo = false;
-                
-                // Só permite pulo se:
-                // 1. Já viu o player há 10 segundos
-                // 2. Já deu pelo menos 2 socos
-                // 3. Tem chance de 40%
-                if (tempo_visto_player >= tempo_minimo_pulo && socos_consecutivos >= socos_minimos){
-                    if (irandom(100) < chance_pulo_apos_socos){
-                        fazer_pulo = true;
-                    }
-                }
-                
-                if (fazer_pulo && pulo_especial_cooldown <= 0){
-                    // PULO ESPECIAL
-                    pulo_especial_ativo = true;
-                    pulo_especial_duracao = 40;
-                    pulo_especial_tocou_player = false;
-                    
-                    // Pulo muito forte
-                    if (place_meeting(x, y + 1, obj_Block)){
-                        vspdEnemy = -12;
-                    }
-                    
-                    audio_play_sound(snd_Espada, 10, false);
-                    pulo_especial_cooldown = pulo_especial_delay;
-                    socos_consecutivos = 0; // Reset dos socos
+            if (place_meeting(x, y + 1, obj_Block)){
+                // Cooldown entre ataques
+                if (ataque_cooldown > 0){
+                    ataque_cooldown--;
                 }
                 else {
-                    // SOCO NORMAL
-                    if (!ataque_ativo){
-                        ataque_ativo = true;
-                        ataque_duracao = 15;
-                        ataque_tocou_player = false;
+                    var fazer_pulo = false;
+                    
+                    // Se já deu 3 socos, pode ter chance de pular
+                    if (socos_consecutivos >= socos_minimos){
+                        if (irandom(100) < chance_pulo_apos_socos){
+                            fazer_pulo = true;
+                        }
+                    }
+                    
+                    if (fazer_pulo && pulo_especial_cooldown <= 0){
+                        // PULO ESPECIAL
+                        pulo_especial_ativo = true;
+                        pulo_especial_duracao = 40;
+                        pulo_especial_tocou_player = false;
+                        
+                        // Pulo muito forte
+                        if (place_meeting(x, y + 1, obj_Block)){
+                            vspdEnemy = -12;
+                        }
+                        
                         audio_play_sound(snd_Espada, 10, false);
-                        socos_consecutivos++; // Incrementa contador de socos
+                        pulo_especial_cooldown = pulo_especial_delay;
+                        socos_consecutivos = 0; // Reset dos socos
+                    }
+                    else {
+                        // SOCO NORMAL - Sempre prefere atacar primeiro
+                        if (!ataque_ativo){
+                            ataque_ativo = true;
+                            ataque_duracao = 15;
+                            ataque_tocou_player = false;
+                            audio_play_sound(snd_Espada, 10, false);
+                            socos_consecutivos++; // Incrementa contador de socos
+                        }
                     }
                 }
-            }
 
-            // ===== SOCO NORMAL =====
-            if (ataque_ativo){
-                ataque_duracao--;
-                
-                // Aplicar dano se tocar no player
-                if (!ataque_tocou_player && distance_to_object(target) < ataque_alcance){
-                    with(target){
-                        takeDamage(ataque_dano, other.facing);
+                // ===== SOCO NORMAL =====
+                if (ataque_ativo){
+                    ataque_duracao--;
+                    
+                    // Aplicar dano se tocar no player
+                    if (!ataque_tocou_player && distance_to_object(target) < ataque_alcance){
+                        with(target){
+                            takeDamage(12, other.facing);
+                        }
+                        ataque_tocou_player = true;
                     }
-                    ataque_tocou_player = true;
+                    
+                    if (ataque_duracao <= 0){
+                        ataque_ativo = false;
+                        ataque_cooldown = 40; // Delay de 40 frames entre ataques
+                    }
                 }
-                
-                if (ataque_duracao <= 0){
-                    ataque_ativo = false;
-                    ataque_cooldown = 40; // Delay de 40 frames entre ataques
-                }
-            }
 
-            // ===== PULO ESPECIAL =====
-            if (pulo_especial_ativo){
-                pulo_especial_duracao--;
-                
-                // Aplicar dano se tocar no player
-                if (!pulo_especial_tocou_player && distance_to_object(target) < pulo_especial_alcance && !place_meeting(x, y + 1, obj_Block)){
-                    with(target){
-                        takeDamage(pulo_especial_dano, other.facing);
+                // ===== PULO ESPECIAL =====
+                if (pulo_especial_ativo){
+                    pulo_especial_duracao--;
+                    
+                    // Aplicar dano se tocar no player
+                    if (!pulo_especial_tocou_player && distance_to_object(target) < pulo_especial_alcance && !place_meeting(x, y + 1, obj_Block)){
+                        with(target){
+                            takeDamage(18, other.facing);
+                        }
+                        pulo_especial_tocou_player = true;
                     }
-                    pulo_especial_tocou_player = true;
-                }
-                
-                if (pulo_especial_duracao <= 0){
-                    pulo_especial_ativo = false;
-                    ataque_cooldown = 50; // Delay maior após pulo
+                    
+                    if (pulo_especial_duracao <= 0){
+                        pulo_especial_ativo = false;
+                        ataque_cooldown = 50; // Delay maior após pulo
+                    }
                 }
             }
 
             // Checar distância - volta pra CHASE se player ficar longe
             var dist = point_distance(x, y, target.x, target.y);
-            if (dist > dist_tiro + 50){
+            if (dist > dist_tiro + 80){
                 state = EnemyState.CHASE;
             }
         }
