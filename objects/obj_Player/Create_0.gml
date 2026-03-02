@@ -1,5 +1,6 @@
 global.vida_atual = 100;
 global.vida_max   = 100;
+global.moeda = 0;
 
 //Movimento
 hsp    = 0;
@@ -8,6 +9,8 @@ grv    = 0.4;
 walksp = 3;
 
 charge_sound_inst = noone;
+som_passos_cooldown = 0;
+som_passos_delay = 10;
         
 //Pulo
 jump_force_basic = -9;

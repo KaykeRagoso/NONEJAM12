@@ -1,4 +1,4 @@
-/// obj_Inimigo - Step Event (COM SONS)
+/// obj_Inimigo - Step Event (COM SONS POR DISTÂNCIA)
 
 checkDeath();
 
@@ -8,6 +8,13 @@ if (state == EnemyState.DEATH){
     }
     exit;
 }
+
+// ==========================================
+// VARIÁVEIS DE ÁUDIO (Adicione no Create)
+// ==========================================
+// dist_audio_passos = 50;      // Som de passos a 50 pixels
+// dist_audio_ataque = 100;     // Som de ataque a 100 pixels
+// dist_audio_dano = 80;        // Som de dano a 80 pixels
 
 // Dano por contato
 if (state != EnemyState.DEATH) {
@@ -65,6 +72,9 @@ if (player != noone){
             alerta_foi_mostrado = false; // Reseta para mostrar novamente se perder e ver novamente
         }
     }
+    
+    // Salvar distância ao player para usar em sons
+    dist_ao_player = distPlayer;
 }
 
 #endregion
@@ -96,11 +106,14 @@ switch (state){
             facing *= -1;
         }
         
-        // Som de passos durante patrulha
+        // Som de passos durante patrulha (SÓ SE PERTO DO PLAYER)
         if (place_meeting(x, y + 1, obj_Block)){
             som_passos_cooldown--;
             if (som_passos_cooldown <= 0){
-                audio_play_sound(snd_passos_terra, 10, false);
+                // ✅ APENAS TOCA SE PERTO DO PLAYER (50 pixels)
+                if (dist_ao_player < dist_audio_passos){
+                    audio_play_sound(snd_passos_terra, 10, false);
+                }
                 som_passos_cooldown = som_passos_delay;
             }
         }
@@ -120,11 +133,14 @@ switch (state){
                 vspdEnemy = -7.5;
             }
             
-            // Som de passos durante chase
+            // Som de passos durante chase (SÓ SE PERTO DO PLAYER)
             if (place_meeting(x, y + 1, obj_Block)){
                 som_passos_cooldown--;
                 if (som_passos_cooldown <= 0){
-                    audio_play_sound(snd_passos_terra, 10, false);
+                    // ✅ APENAS TOCA SE PERTO DO PLAYER (50 pixels)
+                    if (dist_ao_player < dist_audio_passos){
+                        audio_play_sound(snd_passos_terra, 10, false);
+                    }
                     som_passos_cooldown = som_passos_delay;
                 }
             }
@@ -166,6 +182,11 @@ switch (state){
                 atirarBala();
                 ataque = true;
                 ataque_cool = 0;
+                
+                // ✅ SOM DE ATAQUE APENAS PERTO DO PLAYER
+                if (dist_ao_player < dist_audio_ataque){
+                    audio_play_sound(snd_kick, 5, false);
+                }
             }
             else{
                 ataque_cool++;
@@ -205,6 +226,11 @@ if (tipo_inimigo == EnemyType.BOSS){
         
         if (place_meeting(x, y + 1, obj_Block)){
             vspdEnemy = -12; // Pulo forte
+        }
+        
+        // ✅ SOM DE ATAQUE ESPECIAL APENAS PERTO
+        if (dist_ao_player < dist_audio_ataque){
+            audio_play_sound(snd_Espada, 5, false);
         }
         
         ataque_especial_cooldown = ataque_especial_delay;

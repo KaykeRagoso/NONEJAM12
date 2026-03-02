@@ -94,6 +94,7 @@
     {"name":"obj_Soldado","order":1,"path":"objects/obj_Soldado/obj_Soldado.yy",},
     {"name":"obj_SuperSoldadoArma","order":2,"path":"objects/obj_SuperSoldadoArma/obj_SuperSoldadoArma.yy",},
     {"name":"obj_SuperSoldadoSemArma","order":3,"path":"objects/obj_SuperSoldadoSemArma/obj_SuperSoldadoSemArma.yy",},
+    {"name":"obj_VitoriaBoss","order":10,"path":"objects/obj_VitoriaBoss/obj_VitoriaBoss.yy",},
     {"name":"objCreditos","order":8,"path":"objects/objCreditos/objCreditos.yy",},
     {"name":"objDialogo","order":6,"path":"objects/objDialogo/objDialogo.yy",},
     {"name":"objDialogo1","order":7,"path":"objects/objDialogo1/objDialogo1.yy",},

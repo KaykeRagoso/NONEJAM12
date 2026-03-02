@@ -132,6 +132,7 @@
     {"id":{"name":"obj_Soldado","path":"objects/obj_Soldado/obj_Soldado.yy",},},
     {"id":{"name":"obj_SuperSoldadoArma","path":"objects/obj_SuperSoldadoArma/obj_SuperSoldadoArma.yy",},},
     {"id":{"name":"obj_SuperSoldadoSemArma","path":"objects/obj_SuperSoldadoSemArma/obj_SuperSoldadoSemArma.yy",},},
+    {"id":{"name":"obj_VitoriaBoss","path":"objects/obj_VitoriaBoss/obj_VitoriaBoss.yy",},},
     {"id":{"name":"objCreditos","path":"objects/objCreditos/objCreditos.yy",},},
     {"id":{"name":"objDialogo","path":"objects/objDialogo/objDialogo.yy",},},
     {"id":{"name":"objDialogo1","path":"objects/objDialogo1/objDialogo1.yy",},},

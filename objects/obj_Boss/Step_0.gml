@@ -86,7 +86,7 @@ switch (state){
         if (place_meeting(x, y + 1, obj_Block)){
             som_passos_cooldown--;
             if (som_passos_cooldown <= 0){
-                audio_play_sound(snd_passos_terra, 10, false);
+                //audio_play_sound(snd_passos_terra, 10, false);
                 som_passos_cooldown = som_passos_delay;
             }
         }
@@ -111,7 +111,7 @@ switch (state){
             if (place_meeting(x, y + 1, obj_Block)){
                 som_passos_cooldown--;
                 if (som_passos_cooldown <= 0){
-                    audio_play_sound(snd_passos_terra, 10, false);
+                    //audio_play_sound(snd_passos_terra, 10, false);
                     som_passos_cooldown = som_passos_delay;
                 }
             }

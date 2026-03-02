@@ -14,6 +14,11 @@ enum EnemyType {
 }
 #endregion
 
+dist_ao_player = 9999;
+dist_audio_passos = 10;   // Muito perto (em vez de 50)
+dist_audio_ataque = 20;   // Muito perto
+dist_audio_dano = 15;     // Muito perto
+
 #region TIPO DE INIMIGO
 tipo_inimigo = EnemyType.SOLDADO; // Mude para EnemyType.BOSS se for o chefe
 #endregion
