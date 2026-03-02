@@ -1,5 +1,3 @@
-/// obj_Inimigo - Step Event (COM SONS POR DISTÂNCIA)
-
 checkDeath();
 
 if (state == EnemyState.DEATH){
@@ -8,14 +6,6 @@ if (state == EnemyState.DEATH){
     }
     exit;
 }
-
-// ==========================================
-// VARIÁVEIS DE ÁUDIO (Adicione no Create)
-// ==========================================
-// dist_audio_passos = 50;      // Som de passos a 50 pixels
-// dist_audio_ataque = 100;     // Som de ataque a 100 pixels
-// dist_audio_dano = 80;        // Som de dano a 80 pixels
-
 // Dano por contato
 if (state != EnemyState.DEATH) {
 	if (state == EnemyState.PATROL || state == EnemyState.CHASE){
@@ -183,9 +173,8 @@ switch (state){
                 ataque = true;
                 ataque_cool = 0;
                 
-                // ✅ SOM DE ATAQUE APENAS PERTO DO PLAYER
                 if (dist_ao_player < dist_audio_ataque){
-                    audio_play_sound(snd_kick, 5, false);
+                    audio_play_sound(snd_Kick, 5, false);
                 }
             }
             else{
